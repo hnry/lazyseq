@@ -1,0 +1,22 @@
+{
+  "name": "multiarray",
+  "version": "0.0.1",
+  "private": false,
+  "description": "multidimensional array lazy sequence generator",
+  "author": "lovebear",
+  "license": "MIT",
+  "main": "index.js",
+  "keywords": ["generator", "multiarray", "array", "sequence", "multidimensional"],
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "uglify-js": "*",
+    "should": "*"
+  },
+  "repository": "git://github.com/lovebear/multiarray.git"
+}
