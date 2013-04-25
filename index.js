@@ -3,6 +3,8 @@ function LazySeq(data, opts) {
 
   this._akeys = Object.keys(this.data);
 
+  this._akeys = this._akeys.reverse();
+
   this._idx = [];
   this._len = [];
   this.alen = this._akeys.length;
