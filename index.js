@@ -1,4 +1,4 @@
-function LazyGenerator(data, opts) {
+function LazySeq(data, opts) {
   this.data = data;
 
   this._akeys = Object.keys(this.data);
@@ -16,13 +16,13 @@ function LazyGenerator(data, opts) {
   this._done = false;
 }
 
-LazyGenerator.prototype.skip = function(n) {
+LazySeq.prototype.skip = function(n) {
   this.take(n);
 };
 
-LazyGenerator.prototype.take = function(n) {
+LazySeq.prototype.take = function(n) {
   var tmp = [], seq;
-  
+
   for (var i = 0; i < n; i++) {
     seq = this.next();
     if (!seq) break;
@@ -31,14 +31,14 @@ LazyGenerator.prototype.take = function(n) {
   return tmp;
 };
 
-LazyGenerator.prototype.reset = function() {
+LazySeq.prototype.reset = function() {
   for (var i = 0, l = this._idx.length; i < l; i++)
     this._idx[i] = 0;
   this._done = false;
   this._init = true;
 };
 
-LazyGenerator.prototype._adjustIdx = function() {
+LazySeq.prototype._adjustIdx = function() {
   for (var i = this.alen; i > 0; i--) {
     if (this._idx[i - 1] < (this._len[i - 1] - 1)) {
       this._idx[i - 1]++;
@@ -50,7 +50,7 @@ LazyGenerator.prototype._adjustIdx = function() {
   }
 };
 
-LazyGenerator.prototype.next = function() {
+LazySeq.prototype.next = function() {
     if (this._init) {
       this._init = false;
     } else {
@@ -66,4 +66,4 @@ LazyGenerator.prototype.next = function() {
     return retObj;
 };
 
-if (module && module.exports) module.exports = LazyGenerator;
+if (typeof module !== 'undefined' && module.exports) module.exports = LazySeq;

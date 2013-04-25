@@ -2,6 +2,9 @@
 
 ## A multi-dimensional lazy sequence generator...
 
+For node.js or browser
+
+
 ```js
 var datasets = { 'a': [1,2,3,4], 'b': [1,2,3,4], 'c': ['a', 'b', 'c'] };
 
