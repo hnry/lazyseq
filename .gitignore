@@ -3,5 +3,5 @@ v8.log
 node_modules
 npm-debug.log
 package
-multiarray*.tgz
+lazyseq*.tgz
 pack.sh

@@ -1,11 +1,11 @@
-[![Build Status](https://travis-ci.org/lovebear/multiarray.png)](https://travis-ci.org/lovebear/multiarray)
+[![Build Status](https://travis-ci.org/lovebear/lazyseq.png)](https://travis-ci.org/lovebear/lazyseq)
 
 ### A multi-dimensional lazy sequence generator...
 
 Basically giving a object:
 
 ```js
-var data = { 'a': [1,2,3,4], 'b': [1,2,3,4]: 'c': ['a', 'b', 'c'] };
+var data = { 'a': [1,2,3,4], 'b': [1,2,3,4], 'c': ['a', 'b', 'c'] };
 
 var multiarray = require('multiarray');
 

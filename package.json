@@ -1,12 +1,12 @@
 {
-  "name": "multiarray",
-  "version": "0.0.1",
+  "name": "lazyseq",
+  "version": "0.0.2",
   "private": false,
-  "description": "multidimensional array lazy sequence generator",
+  "description": "lazy sequence generator",
   "author": "lovebear",
   "license": "MIT",
   "main": "index.js",
-  "keywords": ["generator", "multiarray", "array", "sequence", "multidimensional"],
+  "keywords": ["generator", "multiarray", "lazy", "sequence", "multidimensional"],
   "engines": {
     "node": ">= 0.6.0"
   },
