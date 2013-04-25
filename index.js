@@ -16,16 +16,19 @@ function LazyGenerator(data, opts) {
   this._done = false;
 }
 
-LazyGenerator.prototype.random = function() {
-  return undefined;
-};
-
 LazyGenerator.prototype.skip = function(n) {
-  return undefined;
+  this.take(n);
 };
 
 LazyGenerator.prototype.take = function(n) {
-  return undefined;
+  var tmp = [], seq;
+  
+  for (var i = 0; i < n; i++) {
+    seq = this.next();
+    if (!seq) break;
+    tmp.push(seq);
+  }
+  return tmp;
 };
 
 LazyGenerator.prototype.reset = function() {

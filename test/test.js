@@ -31,7 +31,9 @@ describe('lazyseq', function() {
     var seq = new LazySeq({ 'x': data1, 'y': data2 }); 
     seq.next().should.eql({ 'x': 1, 'y': 'a' });
     seq.next().should.eql({ 'x': 1, 'y': 'b' });
-    var counter = 2;
+    
+    var counter = 2; // did 2 earlier ^
+    
     while (seq.next()) {
       counter++;
     }
@@ -51,9 +53,27 @@ describe('lazyseq', function() {
 
   it('ordering')
 
-  it('take')
+  it('take', function() {
+    var seq = new LazySeq({ 'x': data1, 'y': data2 }); 
+    seq.next().should.eql({ 'x': 1, 'y': 'a' });
+    seq.take(1);
+    seq.next().should.eql({ 'x': 1, 'y': 'c' });
+    seq.take(5).should.eql([
+      { x: 2, y: 'a' },
+      { x: 2, y: 'b' },
+      { x: 2, y: 'c' },
+      { x: 3, y: 'a' },
+      { x: 3, y: 'b' }
+    ]);
+    seq.next().should.eql({ 'x': 3, 'y': 'c' });
+  })
 
-  it('skip')
+  it('skip', function() {
+    var seq = new LazySeq({ 'x': data1, 'y': data2 }); 
+    seq.skip(data1.length * data2.length);
+    should.not.exist(seq.next());
+    seq._done.should.be.ok;
+  })
 
   it('random')
 

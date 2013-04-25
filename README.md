@@ -2,20 +2,18 @@
 
 ### A multi-dimensional lazy sequence generator...
 
-Basically giving a object:
-
 ```js
 var data = { 'a': [1,2,3,4], 'b': [1,2,3,4], 'c': ['a', 'b', 'c'] };
 
-var multiarray = require('multiarray');
+var LazySeq = require('lazyseq');
 
-var generator = multiarray(data);
+var seq = new LazySeq(data);
 
-generator(); // { 'a': 1, 'b': 1, 'c': 'a' }
-generator(); // { 'a': 1, 'b': 1, 'c': 'b' }
-generator(); // { 'a': 1, 'b': 1, 'c': 'c' }
-generator(); // { 'a': 1, 'b': 2, 'c': 'a' }
-generator(); // { 'a': 1, 'b': 2, 'c': 'b' }
+seq.next(); // { 'a': 1, 'b': 1, 'c': 'a' }
+seq.next(); // { 'a': 1, 'b': 1, 'c': 'b' }
+seq.next(); // { 'a': 1, 'b': 1, 'c': 'c' }
+seq.next(); // { 'a': 1, 'b': 2, 'c': 'a' }
+seq.next(); // { 'a': 1, 'b': 2, 'c': 'b' }
 
 // etc...
 
@@ -24,6 +22,8 @@ generator(); // { 'a': 1, 'b': 2, 'c': 'b' }
 
 ### todo
 - ability to specify different ordering
-- takes array instead of object
-- browser support
-
+- minimum
+- random
+- random unique
+- skip
+- take
