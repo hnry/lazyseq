@@ -1,6 +1,11 @@
 function LazySeq(data, opts) {
   this.data = data;
 
+  this.opts = {
+    min: undefined,
+    combo: (opts && opts.combo) || false
+  }
+
   if (Array.isArray(this.data)) this._datatype = 'array';
   this._akeys = Object.keys(this.data);
   this._akeys = this._akeys.reverse();
@@ -18,9 +23,21 @@ function LazySeq(data, opts) {
   this._done = false;
 }
 
-LazySeq.prototype.skip = function(n) {
-  this.take(n);
-};
+LazySeq.prototype.__defineGetter__('length', function() {
+  var l = 0;
+  if (this.opts.combo) {
+    l = this._len.reduce(function(prev, curr) {
+      return prev * curr;
+    })
+  } else {
+    l = this._len.reduce(function(prev, curr) {
+      return (prev < curr) ? prev : curr;
+    })
+  }
+  return l;
+});
+
+LazySeq.prototype.map = 0;
 
 LazySeq.prototype.take = function(n) {
   var tmp = [], seq;

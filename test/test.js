@@ -83,9 +83,18 @@ describe('lazyseq', function() {
 
   it('skip', function() {
     var seq = new LazySeq({ 'x': data1, 'y': data2 }); 
-    seq.skip(data1.length * data2.length);
+    seq.take(data1.length * data2.length);
     should.not.exist(seq.next());
     seq._done.should.be.ok;
+  })
+
+  it('length', function() {
+    var seq = new LazySeq({ x: data1, y: data2 }, {combo: true}); 
+    seq.length.should.equal(data1.length * data2.length);
+    seq = new LazySeq({ x: data1, y: data2, z: data1 }, {combo: true}); 
+    seq.length.should.equal(data1.length * data2.length * data1.length);
+    seq = new LazySeq({ x: data1, y: data2, z: data1 }, {combo: false}); 
+    seq.length.should.equal(data2.length);
   })
 
   it('random')
