@@ -6,7 +6,7 @@
   "author": "lovebear",
   "license": "MIT",
   "main": "index.js",
-  "keywords": ["generator", "multiarray", "lazy", "sequence", "multidimensional"],
+  "keywords": ["generator", "generate", "lazy", "sequence", "multidimensional"],
   "engines": {
     "node": ">= 0.6.0"
   },
@@ -18,5 +18,5 @@
     "uglify-js": "*",
     "should": "*"
   },
-  "repository": "git://github.com/lovebear/multiarray.git"
+  "repository": "git://github.com/lovebear/lazyseq.git"
 }

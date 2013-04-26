@@ -24,7 +24,7 @@ describe('lazyseq', function() {
     seq.next().should.eql([2, 'a']);
     seq.next().should.eql([3, 'a']);
     seq.next().should.eql([4, 'a']);
-    //Array.isArray(seq.next()).should.be.ok;
+    Array.isArray(seq.next()).should.be.ok;
   })
 
   it('complete sequence', function() {

@@ -1,8 +1,8 @@
 function LazySeq(data, opts) {
   this.data = data;
 
+  if (Array.isArray(this.data)) this._datatype = 'array';
   this._akeys = Object.keys(this.data);
-
   this._akeys = this._akeys.reverse();
 
   this._idx = [];
@@ -61,10 +61,11 @@ LazySeq.prototype.next = function() {
     
     if (this._done) return undefined;
 
-    var retObj = {};
+    var retObj = (this._datatype) ? [] : {};
     for (var i = 0; i < this.alen; i++) {
       retObj[this._akeys[i]] = this.data[this._akeys[i]][this._idx[i]];
     }
+
     return retObj;
 };
 
