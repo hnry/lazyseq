@@ -22,14 +22,6 @@ function Generator(data, opts) {
   this._done = false;
 }
 
-Generator.prototype.__defineGetter__('length', function() {
-  var l = 0;
-  l = this._len.reduce(function(prev, curr) {
-    return prev * curr;
-  })
-  return l;
-});
-
 Generator.prototype.take = function(n) {
   var tmp = [], seq;
 
@@ -82,23 +74,35 @@ function LazySeq(data) {
 }
 
 LazySeq.prototype.cartesian = function(opts) {
-  return new Generator(this.data, opts);
+  var g = new Generator(this.data, opts);
+
+  g.__defineGetter__('length', function() {
+    var l = 0;
+    l = this._len.reduce(function(prev, curr) {
+      return prev * curr;
+    })
+    return l;
+  });
+
+  return g;
 }
 
-LazySeq.prototype.filter = function() {
+LazySeq.prototype.filter = function(fn) {
   
 }
 
-LazySeq.prototype.map = function() {
+LazySeq.prototype.map = function(fn) {
   
 }
 
-LazySeq.prototype.reduce = function() {
+LazySeq.prototype.reduce = function(fn) {
   
 }
 
-LazySeq.prototype.cycle = function() {
+LazySeq.prototype.interleave = function() {
+  var g = new Generator(this.data);
 
+  return g;
 }
 
 if (typeof module !== 'undefined' && module.exports) module.exports = LazySeq;

@@ -25,6 +25,24 @@ Notice the ordering of the sequence is related to the order of the dataset being
 
 Priority is in the order defined ( c, then a, then b ).
 
+### Generators
+
+#### cartesian
+
+#### map (TODO)
+
+#### reduce (TODO)
+
+#### filter (TODO)
+
+#### cycle (TODO)
+
+#### interleave (TODO)
+
+
+### Generator API
+
+All generators share the same API, which is:
 
 ##### next
 
@@ -34,4 +52,7 @@ Returns the next data in the sequence
 
 Returns the next *n* data in the sequence
 
+##### reset
+
+Resets the generator back to the beginning
 

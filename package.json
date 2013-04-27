@@ -1,6 +1,6 @@
 {
   "name": "lazyseq",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "private": false,
   "description": "lazy sequence mapreduce generator",
   "author": "lovebear",
