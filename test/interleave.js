@@ -7,7 +7,7 @@ var data2 = ['a', 'b', 'c'];
 
 describe('interleave', function() {
 
-  it('next', function() {
+  it.skip('next', function() {
     var seq = new LazySeq([data1, data2]).interleave(); 
     seq.next().should.eql([ 1 ]);
     seq.next().should.eql([ 'a' ]);

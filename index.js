@@ -1,5 +1,7 @@
-function Generator(data, opts) {
+function Generator(data, opts, fn) {
   this.data = data;
+
+  if (fn) this.transform = fn;
 
   this.opts = {
     min: undefined
@@ -40,17 +42,8 @@ Generator.prototype.reset = function() {
   this._init = true;
 };
 
-Generator.prototype._adjustIdx = function() {
-  for (var i = this.alen; i > 0; i--) {
-    if (this._idx[i - 1] < (this._len[i - 1] - 1)) {
-      this._idx[i - 1]++;
-      break;
-    } else {
-      this._idx[i - 1] = 0;
-      if (i == 1) this._done = true;
-    }
-  }
-};
+Generator.prototype._adjustIdx = function() { };
+Generator.prototype.transform = function(d) { return d; }
 
 Generator.prototype.next = function() {
     if (this._init) {
@@ -66,7 +59,7 @@ Generator.prototype.next = function() {
       retObj[this._akeys[i]] = this.data[this._akeys[i]][this._idx[i]];
     }
 
-    return retObj;
+    return this.transform(retObj);
 };
 
 function LazySeq(data) {
@@ -75,6 +68,18 @@ function LazySeq(data) {
 
 LazySeq.prototype.cartesian = function(opts) {
   var g = new Generator(this.data, opts);
+
+  g._adjustIdx = function() {
+    for (var i = this.alen; i > 0; i--) {
+      if (this._idx[i - 1] < (this._len[i - 1] - 1)) {
+        this._idx[i - 1]++;
+        break;
+      } else {
+        this._idx[i - 1] = 0;
+        if (i == 1) this._done = true;
+      }
+    }
+  }
 
   g.__defineGetter__('length', function() {
     var l = 0;
@@ -92,7 +97,21 @@ LazySeq.prototype.filter = function(fn) {
 }
 
 LazySeq.prototype.map = function(fn) {
-  
+  var g = new Generator(this.data, {}, fn);
+
+  g._adjustIdx = function() {
+    if (this._done) return;
+    for (var i = 0, l = this._idx.length; i < l; i++) {
+      if (this._idx[i] > this._len[i]) {
+        this._done = true;
+        break;
+      } else {
+        this._idx[i]++;
+      }
+    }
+  }
+
+  return g;
 }
 
 LazySeq.prototype.reduce = function(fn) {

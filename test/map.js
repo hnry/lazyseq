@@ -10,7 +10,10 @@ describe('map', function() {
   it('next', function() {
     var seq = new LazySeq({ 'x': data1, 'y': data2 })
               .map(function(item, done) {
-                done(item.x + item.y);
+                should.exist(item.x);
+                should.exist(item.y);
+                //done(item.x + item.y);
+                return (item.x + item.y);
               });
 
     seq.next().should.eql('1a');

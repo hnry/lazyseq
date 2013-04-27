@@ -29,15 +29,26 @@ Priority is in the order defined ( c, then a, then b ).
 
 #### cartesian
 
-#### map (TODO)
+(Shown above)
 
-#### reduce (TODO)
+#### map (fn)
 
-#### filter (TODO)
+```js
+var seq = new LazySeq(datasets)
+              .map(function(item) {
+                return item.a + item.b + item.c;
+              });
 
-#### cycle (TODO)
+seq.next(); // '11a'
+seq.next(); // '22b'
+seq.next(); // '33c'
+```
 
-#### interleave (TODO)
+#### reduce -- TODO
+
+#### filter -- TODO
+
+#### interleave -- TODO
 
 
 ### Generator API
