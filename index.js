@@ -1,9 +1,8 @@
-function LazySeq(data, opts) {
+function Generator(data, opts) {
   this.data = data;
 
   this.opts = {
-    min: undefined,
-    combo: (opts && opts.combo) || false
+    min: undefined
   }
 
   if (Array.isArray(this.data)) this._datatype = 'array';
@@ -23,23 +22,15 @@ function LazySeq(data, opts) {
   this._done = false;
 }
 
-LazySeq.prototype.__defineGetter__('length', function() {
+Generator.prototype.__defineGetter__('length', function() {
   var l = 0;
-  if (this.opts.combo) {
-    l = this._len.reduce(function(prev, curr) {
-      return prev * curr;
-    })
-  } else {
-    l = this._len.reduce(function(prev, curr) {
-      return (prev < curr) ? prev : curr;
-    })
-  }
+  l = this._len.reduce(function(prev, curr) {
+    return prev * curr;
+  })
   return l;
 });
 
-LazySeq.prototype.map = 0;
-
-LazySeq.prototype.take = function(n) {
+Generator.prototype.take = function(n) {
   var tmp = [], seq;
 
   for (var i = 0; i < n; i++) {
@@ -50,14 +41,14 @@ LazySeq.prototype.take = function(n) {
   return tmp;
 };
 
-LazySeq.prototype.reset = function() {
+Generator.prototype.reset = function() {
   for (var i = 0, l = this._idx.length; i < l; i++)
     this._idx[i] = 0;
   this._done = false;
   this._init = true;
 };
 
-LazySeq.prototype._adjustIdx = function() {
+Generator.prototype._adjustIdx = function() {
   for (var i = this.alen; i > 0; i--) {
     if (this._idx[i - 1] < (this._len[i - 1] - 1)) {
       this._idx[i - 1]++;
@@ -69,7 +60,7 @@ LazySeq.prototype._adjustIdx = function() {
   }
 };
 
-LazySeq.prototype.next = function() {
+Generator.prototype.next = function() {
     if (this._init) {
       this._init = false;
     } else {
@@ -85,5 +76,29 @@ LazySeq.prototype.next = function() {
 
     return retObj;
 };
+
+function LazySeq(data) {
+  this.data = data;
+}
+
+LazySeq.prototype.cartesian = function(opts) {
+  return new Generator(this.data, opts);
+}
+
+LazySeq.prototype.filter = function() {
+  
+}
+
+LazySeq.prototype.map = function() {
+  
+}
+
+LazySeq.prototype.reduce = function() {
+  
+}
+
+LazySeq.prototype.cycle = function() {
+
+}
 
 if (typeof module !== 'undefined' && module.exports) module.exports = LazySeq;

@@ -2,11 +2,11 @@
   "name": "lazyseq",
   "version": "0.0.4",
   "private": false,
-  "description": "lazy sequence generator",
+  "description": "lazy sequence mapreduce generator",
   "author": "lovebear",
   "license": "MIT",
   "main": "index.js",
-  "keywords": ["generator", "generate", "lazy", "sequence", "multidimensional"],
+  "keywords": ["generator", "generate", "lazy", "sequence", "multidimensional", "map", "mapreduce"],
   "engines": {
     "node": ">= 0.6.0"
   },

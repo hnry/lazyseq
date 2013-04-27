@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/lovebear/lazyseq.png)](https://travis-ci.org/lovebear/lazyseq)
 
-## A multi-dimensional lazy sequence map / generator
+## A multi-dimensional capable lazy sequence mapreduce / generator
 
 For node.js or browser
 
@@ -10,7 +10,7 @@ var datasets = { 'c': ['a', 'b', 'c'], 'a': [1,2,3,4], 'b': [1,2,3,4] };
 
 var LazySeq = require('lazyseq');
 
-var seq = new LazySeq(datasets);
+var seq = new LazySeq(datasets).cartesian();
 
 seq.next(); // { 'a': 1, 'b': 1, 'c': 'a' }
 seq.next(); // { 'a': 1, 'b': 1, 'c': 'b' }
