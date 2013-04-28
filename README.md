@@ -44,7 +44,23 @@ seq.next(); // '22b'
 seq.next(); // '33c'
 ```
 
-#### reduce -- TODO
+#### reduce (fn)
+
+```js
+var seq = new LazySeq(datasets)
+              .reduce(function(prev, curr) {
+                // first run
+                if (prev.a) {
+                  return prev.a + curr.a;
+                } else {
+                  return prev + curr.b;
+                }
+              });
+
+seq.next(); // 3  // first run: 1 + 2
+seq.next(); // 4  // 3 + 1
+seq.next(); // 6  // 4 + 2
+```
 
 #### filter -- TODO
 
