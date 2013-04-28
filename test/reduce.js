@@ -7,15 +7,21 @@ var data2 = ['a', 'b', 'c'];
 
 describe('reduce', function() {
 
-  it.skip('next', function() {
-    var seq = new LazySeq({ 'x': data1, 'y': data1 })
-              .reduce(function(prev, curr, done) {
-                done((curr.x + curr.y) + prev);
+  it('next', function() {
+    var seq = new LazySeq({ 'x': data1, 'y': data2 })
+              .reduce(function(prev, curr) {
+                if (prev.x) {
+                  return (curr.x + curr.y) + (prev.x + prev.y);
+                } else {
+                  return (curr.x + curr.y) + prev;
+                }
               });
 
-    seq.next().should.eql('1a');
-    seq.next().should.eql('2b');
-    seq.next().should.eql('3c');
+    seq.next().should.equal('2b1a');
+    seq.next().should.eql('3c2b1a');
+    seq._done.should.not.be.ok;
+    should.not.exist(seq.next());
+    seq._done.should.be.ok;
   })
 
   it.skip('complete sequence', function() {

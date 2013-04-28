@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/lovebear/lazyseq.png)](https://travis-ci.org/lovebear/lazyseq)
 
-## A multi-dimensional capable lazy sequence mapreduce / generator
+# lazy sequence (multi-dimensional capable) mapreduce / generator
 
 For node.js or browser
 
@@ -25,11 +25,11 @@ Notice the ordering of the sequence is related to the order of the dataset being
 
 Priority is in the order defined ( c, then a, then b ).
 
-### Generators
+## Generators
 
 #### cartesian
 
-(Shown above)
+(Example shown above)
 
 #### map (fn)
 
@@ -51,7 +51,7 @@ seq.next(); // '33c'
 #### interleave -- TODO
 
 
-### Generator API
+## Generator API
 
 All generators share the same API, which is:
 

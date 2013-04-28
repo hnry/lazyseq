@@ -9,16 +9,17 @@ describe('map', function() {
 
   it('next', function() {
     var seq = new LazySeq({ 'x': data1, 'y': data2 })
-              .map(function(item, done) {
+              .map(function(item) {
                 should.exist(item.x);
                 should.exist(item.y);
-                //done(item.x + item.y);
                 return (item.x + item.y);
               });
 
     seq.next().should.eql('1a');
     seq.next().should.eql('2b');
     seq.next().should.eql('3c');
+    should.not.exist(seq.next());
+    seq._done.should.be.ok;
   })
 
   it.skip('complete sequence', function() {
